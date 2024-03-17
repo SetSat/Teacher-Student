@@ -9,7 +9,12 @@ app.use(express.json());
 const PORT = 3000
 
 //connect to mongoose
-mongoose.connect('mongodb://localhost:27017/MentorandStudent')
+
+
+mongoose.connect('mongodb+srv://sathishmonish:rNG1jodTfSz1Txyx@cluster0.jpose2g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+  .then(() => console.log('Connected to Mongodb Atlus!'));
+
+
 app.use('/mentors', mentorapi);
 app.use('/student', studentapi)
 
