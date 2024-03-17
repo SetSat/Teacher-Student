@@ -11,10 +11,17 @@ router.post('/', async (req, res) => {
     await mentor.save();
     res.status(201).json(mentor)
 })
-
+router.get('/mentors', async (req, res) => {
+    try {
+        const mentors = await Mentor.find();
+        res.json(mentors);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+})
 router.post('/:mentorId/students/:studentId', async (req, res) => {
     const { mentorId, studentId } = req.params;
-    
+
 
     // Update Mentor
     const mentor = await Mentor.findById(mentorId);
@@ -32,7 +39,7 @@ router.post('/:mentorId/students/:studentId', async (req, res) => {
     await mentor.save();
 
     // Update Student
-    
+
     student.mentor = mentorId;
     await student.save();
 
